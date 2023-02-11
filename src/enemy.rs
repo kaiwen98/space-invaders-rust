@@ -167,7 +167,6 @@ impl Enemy {
 
 impl Drawable for Enemy {
     fn draw(&self, frame: &mut Frame) {
-        frame[self.x][self.y] = "X";
     }
 }
 
@@ -175,7 +174,7 @@ impl Drawable for Enemy {
 impl Drawable for Enemies {
     fn draw(&self, frame: &mut Frame) {
         for e in self.enemy_list.iter() {
-            e.draw(frame);
+            frame[e.x][e.y] = if self.timer.duration.as_secs_f32() / self.timer.time_left.as_secs_f32() > 2.0 {"X"} else {"+"};
         }
     }
 }
